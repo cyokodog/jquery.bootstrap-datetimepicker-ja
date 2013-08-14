@@ -5,7 +5,7 @@ jquery.bootstrap-datetimepicker-ja
 
 ### Bootstrap Datetime Picker の基本機能
 
-[Bootstrap Datetime Picker](http://tarruda.github.io/bootstrap-datetimepicker/)  は、１つに入力フィールドに対し下記パターンで値をセットすることができます。
+[Bootstrap Datetime Picker](http://tarruda.github.io/bootstrap-datetimepicker/)  は、１つの入力フィールドに対し下記パターンで値をセットすることができます。
 
 1. 日付と時刻（YYYY/MM/DD HH:MI:SS）
 2. 日付のみ（YYYY/MM/DD）
