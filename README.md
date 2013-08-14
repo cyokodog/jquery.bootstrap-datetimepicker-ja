@@ -3,7 +3,7 @@ jquery.bootstrap-datetimepicker-ja
 
 [Bootstrap Datetime Picker](http://tarruda.github.io/bootstrap-datetimepicker/) を使いやすくカスタマイズした jQuery プラグイン
 
-## Bootstrap Datetime Picker の基本機能
+### Bootstrap Datetime Picker の基本機能
 
 [Bootstrap Datetime Picker](http://tarruda.github.io/bootstrap-datetimepicker/)  は、１つに入力フィールドに対し下記パターンで値をセットすることができます。
 
@@ -13,7 +13,7 @@ jquery.bootstrap-datetimepicker-ja
 
 1 のように日付と時刻を入力する場合は、ダイアログの上下部に表示されるアイコンで選択画面を切り替えます。
 
-![http://cyokodog.github.io/jquery.bootstrap-datetimepicker-ja/img/image01.png](Bootstrap Datetime Picker)
+![Bootstrap Datetime Picker](http://cyokodog.github.io/jquery.bootstrap-datetimepicker-ja/img/image01.png)
 
 以下のよう実行します。
 
@@ -73,7 +73,7 @@ data() メソッドで API オブジェクトを取得し、日付選択時に�
 
 ### 時刻ピッカーの秒を非表示にする
 
-![http://cyokodog.github.io/jquery.bootstrap-datetimepicker-ja/img/image02.png](Bootstrap Datetime Picker)
+![Bootstrap Datetime Picker](http://cyokodog.github.io/jquery.bootstrap-datetimepicker-ja/img/image02.png)
 
 時刻を入力する際、秒を指定するケースというのはあまり無いかと思われます。以下のように記述することで、時刻ピッカーの秒を非表示にすることができます。
 
@@ -95,7 +95,7 @@ API よりダイアログのコンテナ部（api.widget）を取得し、その
 
 時刻ピッカーの画面で、時間の数字部を選択すると画面が切り替わり、一定間隔の時間一覧が表示され、いずれかの時間を選択することができます。
 
-![http://cyokodog.github.io/jquery.bootstrap-datetimepicker-ja/img/image03.png](Bootstrap Datetime Picker)
+![Bootstrap Datetime Picker](http://cyokodog.github.io/jquery.bootstrap-datetimepicker-ja/img/image03.png)
 
 分を選択した場合、デフォルトでは何故か３分間隔の一覧が表示されます。アプリにもよるかと思いますが、一般的には 5分、10分、15分間隔あたりがよく使われると思います。以下のように記述することで、任意の時間間隔で表示させることができます。（以下例では５分間隔）
 
