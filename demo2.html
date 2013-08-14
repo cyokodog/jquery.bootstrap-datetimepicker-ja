@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Bootstrap Datetime Picker JA :: Demo</title>
+<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="screen" href="bootstrap-datetimepicker.min.css">
+<link href="demo.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="jquery.hash-contents.js"></script>
+<script src="bootstrap-datetimepicker.min.js"></script>
+<script src="bootstrap-datetimepicker-ja.js"></script>
+<script>
+
+
+jQuery(function($){
+	$('div.demo').hashContents({
+		listTo : 'ul.index',
+		onActive : function(api){
+			if(api.getIndex() == 0){
+				$('#datetimepicker1').datetimepicker_ja();
+			}
+			else
+			if(api.getIndex() == 1){
+				$('#datetimepicker2').datetimepicker_ja({
+					format : 'hh:mm',
+					pickDate : false,
+					pickTime : true
+				});
+			}
+			else
+			if(api.getIndex() == 2){
+				$('#datetimepicker3').datetimepicker_ja({
+					format : 'hh:mm',
+					pickDate : false,
+					pickTime : true,
+					minutesRange : 10,
+					minutesX : 3
+				});
+			}
+			else
+			if(api.getIndex() == 3){
+				$('#datetimepicker4').datetimepicker({
+					format : 'yyyy/MM/dd hh:mm:ss'
+				});
+			}
+		}
+	});
+});
+</script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="page-header">
+				<h1>Bootstrap<br/>Datetimepicker <strong>JA</strong></h1>
+				<p class="lead">
+					$('div.datetimepicker').<strong>datetimepicker_ja</strong>();
+				</p>
+				<div class="navbar">
+					<div class="navbar-inner">
+						<ul class="nav">
+							<li><a href="demo1.html">datetimepicker</a></li>
+							<li class="active"><a href="demo2.html">datetimepicker_ja</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span10">
+
+
+				<div class="demo">
+					<h3>Example1</h3>
+					<p>カスタマイズ版のデフォルトの動作は日付ピッカー</p>
+					<ul>
+						<li>日付ピッカーとして動作</li>
+						<li>日付選択時にダイアログが閉じる</li>
+						<li>日本語表示</li>
+					</ul>
+<pre>
+$('#datetimepicker1').datetimepicker_ja();
+</pre>
+					<div>
+						<div id="datetimepicker1" class="input-append">
+							<input type="text"/><span class="add-on"><i></i></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="demo">
+					<h3>Example2</h3>
+					<p>カスタマイズ版を時刻ピッカーとして起動する</p>
+<pre>
+$('#datetimepicker2').datetimepicker_ja({
+	format : 'hh:mm',
+	pickDate : false,
+	pickTime : true
+});
+</pre>
+					<div>
+						<div id="datetimepicker2" class="input-append">
+							<input type="text"/><span class="add-on"><i></i></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="demo">
+					<h3>Example3</h3>
+					<p>分の選択一覧の分間隔を指定する（例では１０分間隔）</p>
+<pre>
+$('#datetimepicker3').datetimepicker_ja({
+	format : 'hh:mm',
+	pickDate : false,
+	pickTime : true,
+	minutesRange : 10,
+	minutesX : 3
+});
+</pre>
+					<div>
+						<div id="datetimepicker3" class="input-append">
+							<input type="text"/><span class="add-on"><i></i></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="demo">
+					<h3>Example4</h3>
+					<p>オリジナル版の挙動に影響なし</p>
+<pre>
+$('#datetimepicker4').datetimepicker({
+	format : 'yyyy/MM/dd hh:mm:ss'
+});
+</pre>
+					<div>
+						<div id="datetimepicker4" class="input-append">
+							<input type="text"/><span class="add-on"><i></i></span>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+			<div class="span2">
+				<ul class="index nav nav-list"></ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

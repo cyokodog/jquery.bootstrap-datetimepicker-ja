@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Bootstrap Datetime Picker JA :: Demo</title>
+<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="screen" href="bootstrap-datetimepicker.min.css">
+<link href="demo.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="jquery.hash-contents.js"></script>
+<script src="bootstrap-datetimepicker.min.js"></script>
+<script>
+
+
+jQuery(function($){
+	$('div.demo').hashContents({
+		listTo : 'ul.index',
+		onActive : function(api){
+			if(api.getIndex() == 0){
+				$('#datetimepicker1').datetimepicker({
+					format : 'yyyy/MM/dd hh:mm:ss'
+				});
+			}
+			else
+			if(api.getIndex() == 1){
+				var api = $('#datetimepicker2').datetimepicker({
+					format : 'yyyy/MM/dd',
+					pickTime : false
+				}).data('datetimepicker');
+				api.widget.on('click','td.day',function(){
+					api.hide();
+				});
+			}
+			else
+			if(api.getIndex() == 2){
+				$.extend($.fn.datetimepicker.dates , {
+					ja: {
+						days: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日', '日曜日'],
+						daysShort: ['日', '月', '火', '水', '木', '金', '土', '日'],
+						daysMin: ['日', '月', '火', '水', '木', '金', '土', '日'],
+						months: ['1月', '2月', '3月', '4月', '5月', '6月','7月', '8月', '9月', '10月', '11月', '12月'],
+						monthsShort: ['1月', '2月', '3月', '4月', '5月', '6月','7月', '8月', '9月', '10月', '11月', '12月']
+					}
+				});
+				$('#datetimepicker3').datetimepicker({
+					format : 'yyyy/MM/dd hh:mm:ss',
+					language : 'ja'
+				});
+			}
+			else
+			if(api.getIndex() == 3){
+				var api = $('#datetimepicker4').datetimepicker({
+					format : 'hh:mm',
+					pickDate : false
+				}).data('datetimepicker');
+				api.widget.find('.timepicker-picker tr').each(function(){
+					var td = $(this).find('td');
+					td.eq(3).hide();
+					td.eq(4).hide();
+				});
+			}
+			else
+			if(api.getIndex() == 4){
+				$.fn.datetimepicker.Constructor.prototype.fillMinutes = function(){
+					var minutesRange = 5;
+					var minutesX = 4;
+
+					function padLeft(s, l, c) {
+						if (l < s.length) return s;
+						else return Array(l - s.length + 1).join(c || ' ') + s;
+					}
+					var hour = 60;
+					var minutesCol = Math.floor((hour - 1) / minutesRange);
+					var minutesY = Math.ceil(minutesCol / minutesX);
+					var table = this.widget.find('.timepicker .timepicker-minutes table');
+					table.parent().hide();
+					var html = '';
+					var current = 0;
+					for (var i = 0; i < minutesY; i++) {
+						html += '<tr>';
+						for (var j = 0; j < minutesX; j += 1) {
+							if(current < hour){
+								var c = current.toString();
+								html += '<td class="minute">' + padLeft(c, 2, '0') + '</td>';
+							}
+							else{
+								html += '<td/>'
+							}
+							current += minutesRange;
+						}
+						html += '</tr>';
+					}
+					table.html(html);
+				}
+				$('#datetimepicker5').datetimepicker({
+					format : 'hh:mm:ss',
+					pickDate : false
+				});
+			}
+		}
+	});
+});
+</script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="page-header">
+				<h1>Bootstrap<br/>Datetimepicker</h1>
+				<p class="lead">
+					$('div.datetimepicker').<strong>datetimepicker</strong>();
+				</p>
+				<div class="navbar">
+					<div class="navbar-inner">
+						<ul class="nav">
+							<li class="active"><a href="demo1.html">datetimepicker</a></li>
+							<li><a href="demo2.html">datetimepicker_ja</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span10">
+
+
+				<div class="demo">
+					<h3>Example1</h3>
+					<p>Bootstrap Datetime Picker の使用例</p>
+<pre>
+$('#datetimepicker1').datetimepicker({
+	format : 'yyyy/MM/dd hh:mm:ss'
+});
+</pre>
+					<div>
+						<div id="datetimepicker1" class="input-append">
+							<input type="text"/><span class="add-on"><i></i></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="demo">
+					<h3>Example2</h3>
+					<p>日付ピッカーとして使用し、日付を選択した時にダイアログを閉じるようにする</p>
+<pre>
+var api = $('#datetimepicker2').datetimepicker({
+	format : 'yyyy/MM/dd',
+	pickTime : false
+}).data('datetimepicker');
+
+api.widget.on('click','td.day',function(){
+	api.hide();
+});
+</pre>
+
+					<div>
+						<div id="datetimepicker2" class="input-append">
+							<input type="text"/><span class="add-on"><i></i></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="demo">
+					<h3>Example3</h3>
+					<p>日本語表示にする</p>
+<pre>
+$.extend($.fn.datetimepicker.dates , {
+	ja: {
+		days: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日', '日曜日'],
+		daysShort: ['日', '月', '火', '水', '木', '金', '土', '日'],
+		daysMin: ['日', '月', '火', '水', '木', '金', '土', '日'],
+		months: ['1月', '2月', '3月', '4月', '5月', '6月','7月', '8月', '9月', '10月', '11月', '12月'],
+		monthsShort: ['1月', '2月', '3月', '4月', '5月', '6月','7月', '8月', '9月', '10月', '11月', '12月']
+	}
+});
+$('#datetimepicker3').datetimepicker({
+	format : 'yyyy/MM/dd hh:mm:ss',
+	language : 'ja'
+});
+</pre>
+					<div>
+						<div id="datetimepicker3" class="input-append">
+							<input type="text"/><span class="add-on"><i></i></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="demo">
+					<h3>Example4</h3>
+					<p>時刻ピッカーの秒を非表示にする</p>
+<pre>
+var api = $('#datetimepicker4').datetimepicker({
+	format : 'hh:mm',
+	pickDate : false
+}).data('datetimepicker');
+api.widget.find('.timepicker-picker tr').each(function(){
+	var td = $(this).find('td');
+	td.eq(3).hide();
+	td.eq(4).hide();
+});
+</pre>
+
+					<div>
+						<div id="datetimepicker4" class="input-append">
+							<input type="text"/><span class="add-on"><i></i></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="demo">
+					<h3>Example5</h3>
+					<p>分の選択画面の時間間隔を変更する（例では５分間隔）</p>
+<pre>
+$.fn.datetimepicker.Constructor.prototype.fillMinutes = function(){
+	var minutesRange = 5;
+	var minutesX = 4;
+
+	function padLeft(s, l, c) {
+		if (l < s.length) return s;
+		else return Array(l - s.length + 1).join(c || ' ') + s;
+	}
+	var hour = 60;
+	var minutesCol = Math.floor((hour - 1) / minutesRange);
+	var minutesY = Math.ceil(minutesCol / minutesX);
+	var table = this.widget.find('.timepicker .timepicker-minutes table');
+	table.parent().hide();
+	var html = '';
+	var current = 0;
+	for (var i = 0; i < minutesY; i++) {
+		html += '<tr>';
+		for (var j = 0; j < minutesX; j += 1) {
+			if(current < hour){
+				var c = current.toString();
+				html += '<td class="minute">' + padLeft(c, 2, '0') + '</td>';
+			}
+			else{
+				html += '<td/>'
+			}
+			current += minutesRange;
+		}
+		html += '</tr>';
+	}
+	table.html(html);
+}
+$('#datetimepicker5').datetimepicker({
+	format : 'hh:mm:ss',
+	pickDate : false
+});
+</pre>
+					<div>
+						<div id="datetimepicker5" class="input-append">
+							<input type="text"/><span class="add-on"><i></i></span>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+			<div class="span2">
+				<ul class="index nav nav-list"></ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
