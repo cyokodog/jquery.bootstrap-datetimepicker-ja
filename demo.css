@@ -1,12 +1,8 @@
 body{
-	padding-bottom:1000px;
+	padding:0 0 1000px;
 }
-h3{
-	color:#777;
-}
-h4{
-	margin:48px 0 16px;
-	color:#507090;
+div.page-header{
+	margin-top:64px;
 }
 strong{
 	color:#ff3355;
