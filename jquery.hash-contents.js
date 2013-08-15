@@ -1,5 +1,5 @@
 /*
- * 	Hash Contents 0.1.1 - jQuery plugin
+ * 	Hash Contents 0.2 - jQuery plugin
  *	written by cyokodog
  *
  *	Copyright (c) 2013 cyokodog 
@@ -41,13 +41,14 @@
 	var plugin = $.hashContents = function(target, option){
 		var o = this,
 		c = o.config = $.extend(true,{}, plugin.defaults, option, o.getJsonData(target) || {});
-		c.target = c.orgTarget = target.eq(0);
-		if(!c.target.prop('id')){
-			c.target.prop('id', c.prefix + c.index);
-		}
-		c.id = c.target.prop('id');
+		c.target = target;
+		c.isHeaderTag = /^H\d$/.test(c.target.prop('tagName'));
+		if(c.isHeaderTag) c.toggle = false;
+		if(!c.toggle) c.reload = false;
+		c.id = c.target.prop('id') || c.prefix + c.index;
+		c.toggle ? (!c.target.prop('id') || c.target.prop('id','')) : (c.target.prop('id') || c.target.prop('id',c.id))
 		c.list = $('<li/>');
-		var a = $('<a/>').prop('href', '#' + c.target.prop('id')).text(o.getParam('title'));
+		var a = $('<a/>').prop('href', '#' + c.id).text(o.getParam('title'));
 		a.on('click',function(){
 			if(c.reload){
 				$('body').fadeOut(function(){
@@ -55,9 +56,8 @@
 				});
 				return true;
 			}
-			var id = c.target.prop('id');
-			if(location.hash == '#'+id) return false;
-			location.hash = id;
+			if(location.hash == '#'+c.id) return false;
+			location.hash = c.id;
 			o.showContents(c.index);
 			return false;
 		});
@@ -108,22 +108,24 @@
 				var t = $(this);
 				t.data(plugin.id).config.list.removeClass('active');
 				if(c.index != idx){
-					c.reload ? t.remove() : t.hide();
+					!c.toggle || (c.reload ? t.remove() : t.hide());
 				}
 			});
 			c.list.addClass('active');
 			if(!c.reload){
-				var top1 = $(window).scrollTop();
-				c.target.data(plugin.id).config.list.addClass('active');
-				var top2 = c.target.show().offset().top;
-				c.target.hide().fadeIn(function(){
-					if(top1 > top2) $('html,body').animate({scrollTop:top2});
-					c.targets.data(plugin.id + '-current-index', c.index);
-					if(!c.init){
-						c.init = true;
-						c.onActive.apply(o,[o]);
-					}
-				})
+				if(c.toggle){
+					var top1 = $(window).scrollTop();
+					c.target.data(plugin.id).config.list.addClass('active');
+					var top2 = c.target.show().offset().top;
+					c.target.hide().fadeIn(function(){
+						if(top1 > top2) $('html,body').animate({scrollTop:top2});
+						c.targets.data(plugin.id + '-current-index', c.index);
+						if(!c.init){
+							c.init = true;
+							c.onActive.apply(o,[o]);
+						}
+					})
+				}
 			}
 			else{
 				c.onActive.apply(o,[o]);
@@ -138,13 +140,15 @@
 			prefix : 'contents',
 			listTo : '',
 			reload : true,
+			toggle : true,
 			titleSelector : 'h3',
 			title : function(api){
-				return api.getTarget().find(api.getConfig().titleSelector).eq(0).text();
+				var o = api, c = o.config;
+				return c.isHeaderTag ? c.target.text() : c.target.find(c.titleSelector).eq(0).text();
 			},
 			onActive : function(api){}
 		},
-		version : '0.1.1',
+		version : '0.2',
 		id : 'hash-contents',
 		paramId : 'hash-contents-param'
 	});
